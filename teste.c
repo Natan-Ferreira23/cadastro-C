@@ -69,7 +69,7 @@ int main(){
                         printf("ID: %d\nNome funcionario: %s\nCargo: %s\nSetor: %s\nData nascimento: %d\nSalario: %.2lf \n",funcionario[i].id,funcionario[i].nome,funcionario[i].cargo, funcionario[i].setor,funcionario[i].nascimento,funcionario[i].salario);
                         break;
                     }
-                    else if(i=ide){
+                    else if(i==ide){
                         printf(" Nao encontrado\n");
                     }
                 }
