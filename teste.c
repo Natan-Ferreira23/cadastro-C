@@ -15,7 +15,7 @@ struct funcionarios{
     int workSemFerias;
  };
 int main(){
-    int i,escolha=0,ide;
+    int i,escolha=0,ide,totalfunc=0;
     double aumen,teste,total;
     struct funcionarios funcionario[3];
     for(i=0;i<3;i++){
@@ -33,8 +33,7 @@ int main(){
         printf("8- Sair do menu \n");
         printf("Escolha um item do menu:");
         scanf("%d",&escolha);
-        printf(" ---------------------------------------------------\n");
-
+        printf("---------------------------------------------------\n");
         if(escolha==1){
             for(i=0;i<3;i++){
                 if(funcionario[i].id==-1){
@@ -50,7 +49,7 @@ int main(){
                     printf(" Digite o setor do funcionario: ");
                     scanf(" %[^\n]s",funcionario[i].setor);
                     fflush(stdin);
-                    printf(" Digite sua data de nascimento: ");
+                    printf(" Digite seu ano de nascimento: ");
                     scanf("%d",&funcionario[i].nascimento);
                     printf(" Digite o salario: ");
                     scanf("%lf",&funcionario[i].salario);
@@ -120,6 +119,38 @@ int main(){
              }
            }
         }
+    if(escolha==6){
+            printf("Digite seu id de funcionario: ");
+            scanf("%d",&ide);
+        for(i=0;i<=ide;i++){
+            if(ide==funcionario[i].id){
+                printf("%s quantos meses esta sem pegar ferias: ", funcionario[i].nome);
+                scanf("%d",&funcionario[i].workSemFerias);
+            if(funcionario[i].workSemFerias>6){
+                printf(" Voce esta a mais de 6 meses sem pegar ferias, pode pegar !!\n");
+            }
+            else if (funcionario[i].workSemFerias<=6 && funcionario[i].workSemFerias>=0){
+                printf(" Voce ja pegou ferias em algum momento dos ultimos 6 meses, aguarde dar 6 meses completos \n");
+            }
+            else{
+                printf(" Insira um valor valido \n");
+            }
+            break;
+            }
+            else if (i==ide){
+                printf(" O funcionario nao foi encontrado");
+            }
+        }
+    }
+
+        if(escolha==7){
+            for(i=0;i<3;i++){
+                if(funcionario[i].id!=-1){
+                    totalfunc++;
+                }
+            }
+            printf("Total de Funcionarios:%d\n",totalfunc);
+        }
     }
 return 0;
 }
@@ -144,5 +175,4 @@ if(sexo=='m' || sexo=='M' || sexo=='f' || sexo=='F'){
 else{
     printf("Sexo informado errado\n");
 }
-
 }
