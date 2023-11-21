@@ -15,10 +15,10 @@ struct funcionarios{
     int workSemFerias;
  };
 int main(){
-    int i,escolha=0,ide,totalfunc=0;
+    int i,escolha=0,ide,totalfunc=0,achou,tamanho=0;
     double aumen,teste,total;
-    struct funcionarios funcionario[3];
-    for(i=0;i<3;i++){
+    struct funcionarios funcionario[1000];
+    for(i=0;i<1000;i++){
         funcionario[i].id= -1;
     }
     while(escolha!=8){
@@ -31,11 +31,12 @@ int main(){
         printf("6- Verificar se pode pegar ferias\n");
         printf("7- Verificar o total de funcionarios:\n");
         printf("8- Sair do menu \n");
-        printf("Escolha um item do menu:");
+        printf(" Escolha um item do menu:");
         scanf("%d",&escolha);
         printf("---------------------------------------------------\n");
         if(escolha==1){
-            for(i=0;i<3;i++){
+            achou=0;
+            for(i=0;i<=1000;i++){
                 if(funcionario[i].id==-1){
                     funcionario[i].id=i+1;
                     printf("-- Ainda temos vagas podemos cadastrar -- \n");
@@ -53,11 +54,13 @@ int main(){
                     scanf("%d",&funcionario[i].nascimento);
                     printf(" Digite o salario: ");
                     scanf("%lf",&funcionario[i].salario);
+                    achou++;
+                    tamanho++;
                     break;
                 }
-                else if(i==2){
-                    printf(" Todas as vagas estao cheias\n");
-                }
+            }
+            if(achou==0){
+                printf("Todas as vagas foram preenchidas\n");
             }
         }
         if(escolha==2){
@@ -77,38 +80,46 @@ int main(){
         if(escolha==3){
             printf("Qual o ID do funcionario que deseja remover?:");
             scanf("%d",&ide);
-            for(i=0;i<3;i++){
+            for(i=0;i<=ide;i++){
                 if(ide==funcionario[i].id){
                     funcionario[i].id=-1;
+                    printf("Funcionario removido\n");
+                    tamanho--;
                     break;
                 }
-                else if(i==2){
-                    printf("Funcionario nao encontrado");
+                else if(i==ide){
+                    printf("Funcionario nao encontrado\n");
                 }
             }
         }
         if(escolha==4){
+            achou=0;
             printf("Qual Funcionario deseja aumentar o salario?(ID):");
             scanf("%d",&ide);
-            printf("Informe em porcentagem quanto deseja aumentar do salario:");
-            scanf("%lf",&aumen);
-            aumen/=100;
-            aumen+=1.0;
-            for(i=0;i<3;i++){
-                if(ide==funcionario[i].id){
-                    funcionario[i].salario=aumento(funcionario[i].salario,aumen);
-                    break;
+            for(i=0;i<=ide;i++){
+                if(funcionario[i].id==ide && achou==0){
+                    printf("Informe em porcentagem quanto deseja aumentar do salario:");
+                    scanf("%lf",&aumen);
+                    aumen/=100;
+                    aumen+=1.0;
+                    achou++;
+                    for(i=0;i<=ide;i++){
+                        if(ide==funcionario[i].id){
+                        funcionario[i].salario=aumento(funcionario[i].salario,aumen);
+                        break;
+                        }
+                    }
                 }
-                else if(i==2){
-                    printf("Funcionario nao encontrado");
-                }
+            }
+            if(achou==0){
+                printf("Funcionario nao encontrado\n");
             }
         }
         if(escolha==5){
             printf("-- Verficiando se pode aposentar --\n");
             printf(" Digite o ID do funcionario: ");
             scanf("%d",&ide);
-           for(i=0;i<3;i++){
+           for(i=0;i<=ide;i++){
              if(funcionario[i].id==ide){
                  printf(" Digite o tempo de contribuicao do funcionario: ");
                  scanf("%d",&funcionario[i].tempoServico);
@@ -117,6 +128,9 @@ int main(){
                  aposentar(funcionario[i].tempoServico,funcionario[i].nascimento,funcionario[i].sexo);
                  break;
              }
+             else if(i==ide){
+                printf("Funcionario nao encontrado\n");
+            }
            }
         }
     if(escolha==6){
@@ -144,12 +158,14 @@ int main(){
     }
 
         if(escolha==7){
-            for(i=0;i<3;i++){
+            for(i=0;i<1000;i++){
                 if(funcionario[i].id!=-1){
-                    totalfunc++;
-                }
+                    printf("-- Dados do funcionario --\n");
+                    printf("ID: %d\nNome funcionario: %s\nCargo: %s\nSetor: %s\nData nascimento: %d\nSalario: %.2lf \n",funcionario[i].id,funcionario[i].nome,funcionario[i].cargo, funcionario[i].setor,funcionario[i].nascimento,funcionario[i].salario);
+               }
             }
-            printf("Total de Funcionarios:%d\n",totalfunc);
+            printf("---------------------------------------------------\n");
+            printf(" Total de Funcionarios:%d\n",tamanho);
         }
     }
 return 0;
@@ -166,13 +182,13 @@ if(sexo=='m' || sexo=='M' || sexo=='f' || sexo=='F'){
         printf("Sim\n");
     }
     else if(idade>60 && contribuicao>30 && (sexo=='F' || sexo=='f')){
-        printf("Sim\n");
+        printf(" Pode aposentar\n");
     }
     else{
-        printf("Nao\n");
+        printf(" Nao pode aposentar\n");
     }
 }
 else{
-    printf("Sexo informado errado\n");
+    printf(" Sexo informado errado\n");
 }
 }
