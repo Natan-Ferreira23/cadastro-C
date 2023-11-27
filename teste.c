@@ -52,7 +52,7 @@ int main(){
                     fflush(stdin);
                     printf(" Digite seu ano de nascimento: ");
                     scanf("%d",&funcionario[i].nascimento);
-                    printf(" Digite o salario: ");
+                    printf(" Digite o salario R$: ");
                     scanf("%lf",&funcionario[i].salario);
                     achou++;
                     tamanho++;
@@ -69,7 +69,7 @@ int main(){
                 for(i=0;i<=ide;i++){
                     if(ide==funcionario[i].id){
                         printf("-- Dados do funcionario --\n");
-                        printf("ID: %d\nNome funcionario: %s\nCargo: %s\nSetor: %s\nData nascimento: %d\nSalario: %.2lf \n",funcionario[i].id,funcionario[i].nome,funcionario[i].cargo, funcionario[i].setor,funcionario[i].nascimento,funcionario[i].salario);
+                        printf("ID: %d\nNome funcionario: %s\nCargo: %s\nSetor: %s\nData nascimento: %d\nSalario R$: %.2lf \n",funcionario[i].id,funcionario[i].nome,funcionario[i].cargo, funcionario[i].setor,funcionario[i].nascimento,funcionario[i].salario);
                         break;
                     }
                     else if(i==ide){
@@ -106,6 +106,7 @@ int main(){
                     for(i=0;i<=ide;i++){
                         if(ide==funcionario[i].id){
                         funcionario[i].salario=aumento(funcionario[i].salario,aumen);
+                        printf("Salario atualizado \n");
                         break;
                         }
                     }
@@ -138,7 +139,7 @@ int main(){
             scanf("%d",&ide);
         for(i=0;i<=ide;i++){
             if(ide==funcionario[i].id){
-                printf("%s quantos meses esta sem pegar ferias: ", funcionario[i].nome);
+                printf(" %s esta a quantos meses sem pegar ferias: ", funcionario[i].nome);
                 scanf("%d",&funcionario[i].workSemFerias);
             if(funcionario[i].workSemFerias>6){
                 printf(" Voce esta a mais de 6 meses sem pegar ferias, pode pegar !!\n");
@@ -152,7 +153,7 @@ int main(){
             break;
             }
             else if (i==ide){
-                printf(" O funcionario nao foi encontrado");
+                printf(" O funcionario nao foi encontrado\n");
             }
         }
     }
@@ -179,7 +180,7 @@ void aposentar(int contribuicao, int nasc,char sexo){
 int idade=2023-nasc;
 if(sexo=='m' || sexo=='M' || sexo=='f' || sexo=='F'){
     if(idade>65 && contribuicao>35 && (sexo=='M' || sexo=='m')){
-        printf("Sim\n");
+        printf(" Pode aposentar\n");
     }
     else if(idade>60 && contribuicao>30 && (sexo=='F' || sexo=='f')){
         printf(" Pode aposentar\n");
